@@ -66,9 +66,9 @@ class Tree:
 				lastStep = step
 
 		if lastStep.value < value:
-			lastStep.right = TreeNode(value, lastStep)
+			lastStep.right = TreeNode(value)
 		else:
-			lastStep.left = TreeNode(value, lastStep)
+			lastStep.left = TreeNode(value)
 
 		self.count += 1
 	# }
@@ -103,9 +103,8 @@ class Tree:
 
 class TreeNode:
 
-	def __init__(self, value, parent = None):
+	def __init__(self, value):
 		self.value = value
-		self.parent = parent
 		self.left = None
 		self.right = None
 
@@ -122,6 +121,13 @@ class TreeNode:
 			self.left.preOrder(fn)
 		if self.right:
 			self.right.preOrder(fn)
+
+	def inOrderGenerator(self) : 
+		if self.left:
+			yield from self.left.inOrderGenerator()
+		yield self.value
+		if self.right:
+			yield from self.right.inOrderGenerator()
 
 # / TreeNode	
 
